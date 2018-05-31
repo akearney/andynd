@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import * as THREE from 'three';
-import earth from './textures/earthmap1k.jpg';
+import earth from './textures/WorldMap.png';
 
 import './global_map.css';
 
