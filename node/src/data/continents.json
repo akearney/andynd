@@ -5,16 +5,65 @@
     "creatorRace": ""
   },
   "Cerelia": {
-    "creatorRace": "Human"
+    "creatorRace": "Human",
+    "plane": {
+      "size": {
+        "x": 0.26,
+        "y": 0.26
+      },
+      "position": {
+        "x": 0.5,
+        "y": 0.2,
+        "z": 0.05
+      },
+      "rotation": {
+        "x": 0,
+        "y": 1.57,
+        "z": 0
+      }
+    }
   },
   "Tollanar": {
-    "creatorRace": "Aearee (known as avians, and creators of the aarakocra, kenku, and other birdlike humanoids)"
+    "creatorRace": "Aearee (known as avians, and creators of the aarakocra, kenku, and other birdlike humanoids)",
+    "plane": {
+      "size": {
+        "x": 0.45,
+        "y": 0.55
+      },
+      "position": {
+        "x": -0.41,
+        "y": 0,
+        "z": 0.3
+      },
+      "rotation": {
+        "x": 0,
+        "y": -0.80,
+        "z": 0
+      }
+    }
   },
   "Aduria": {
-    "creatorRace": "Batrachi (creators of the bullywugs, doppelgangers, kopru, kuo-toa, locathah, sivs, tako and other shapeshifting, amphibious, or piscine races)"
+    "creatorRace": "Batrachi (creators of the bullywugs, doppelgangers, kopru, kuo-toa, locathah, sivs, tako and other shapeshifting, amphibious, or piscine races)",
+    "otherRaces": "Dwarves, Orcs",
+    "plane": {
+      "size": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "position": {
+        "x": 0.3,
+        "y": -0.1,
+        "z": 0.40
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0.7,
+        "z": 0
+      }
+    }
   },
   "Thaele": {
-    "creatorRace": "null",
+    "creatorRace": null,
     "otherRaces": "Giantkin",
     "plane": {
       "size": {
@@ -27,16 +76,50 @@
         "z": 0
       },
       "rotation": {
-        "x": 80,
+        "x": 1.57,
         "y": 0,
         "z": 0
       }
     }
   },
   "Djapar": {
-    "creatorRace": "Sarrukh (creators of the yuan-ti, naga, lizardfolk, and scalykind)"
+    "creatorRace": "Sarrukh (creators of the yuan-ti, naga, lizardfolk, and scalykind)",
+    "otherRaces": "Goblinoids",
+    "plane": {
+      "size": {
+        "x": 0.48,
+        "y": 0.53
+      },
+      "position": {
+        "x": 0.38,
+        "y": -0.2,
+        "z": 0.35
+      },
+      "rotation": {
+        "x": 0.3,
+        "y": -2,
+        "z": 0.4
+      }
+    }
   },
   "Niashon": {
-    "creatorRace": "Fey (known as sylvans, and creators of korreds, halflings, sprites, and pixies)"
+    "creatorRace": "Fey (known as sylvans, and creators of korreds, halflings, sprites, and pixies)",
+    "otherRaces": "Elves",
+    "plane": {
+      "size": {
+        "x": 0.25,
+        "y": 0.25
+      },
+      "position": {
+        "x": 0.3,
+        "y": -0.3,
+        "z": -0.3
+      },
+      "rotation": {
+        "x": -0.6,
+        "y": -0.6,
+        "z": 0
+      }
+    }
   }
 }

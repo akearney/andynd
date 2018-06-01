@@ -7,7 +7,12 @@ import continents from '../data/continents.json';
 
 import './global_map.css';
 
-const INFO_COLOR = 0xffff00;
+/*
+const AXES_HELPER = true;
+const DEBUG_PLANE = 'Djapar';
+*/
+const AXES_HELPER = false;
+const DEBUG_PLANE = '';
 
 export default class GlobalMap extends Component {
   constructor(props) {
@@ -29,9 +34,13 @@ export default class GlobalMap extends Component {
     this.camera = new THREE.PerspectiveCamera(
       75, window.innerWidth / window.innerHeight, 0.1, 100 );
     this.camera.up.set(0, 1, 0);
-    this.camera.position.z = 1;
+    this.camera.position.x = 2;
     this.camera.lookAt(new THREE.Vector3(0,0,0));
     this.scene = new THREE.Scene();
+    if (AXES_HELPER) {
+      const axes = new THREE.AxesHelper(5);
+      this.scene.add(axes);
+    }
 
     const light = new THREE.DirectionalLight(0xffffff, 1);
     light.position.set(5,5,5);
@@ -63,34 +72,34 @@ export default class GlobalMap extends Component {
   addInfoSquares() {
     for (let i = 0; i < continents.names.length; i++) {
       const name = continents.names[i];
-      console.log(name);
       const plane = continents[name].plane;
-      console.log(continents[name]);
       if (!plane) {
         continue;
       }
-      console.log(plane);
-      const geometry = new THREE.PlaneGeometry(plane.size.x, plane.size.y, plane.size.z);
+      if (DEBUG_PLANE && name != DEBUG_PLANE) {
+        continue;
+      }
+      const geometry = new THREE.PlaneGeometry(plane.size.x, plane.size.y, 32);
       const material = new THREE.MeshBasicMaterial( {
-        color: INFO_COLOR,
+        color: 0x000000,
+        transparent: true,
         side: THREE.DoubleSide
       } );
-      if (INFO_COLOR === 0x000000) {
-        material.opacity = 0;
-      }
+      material.opacity = 0;
       const planeMesh = new THREE.Mesh( geometry, material );
-      planeMesh.rotation.x = plane.rotation.x;
-      planeMesh.rotation.y = plane.rotation.y;
-      planeMesh.rotation.z = plane.rotation.z;
       planeMesh.position.x = plane.position.x;
       planeMesh.position.y = plane.position.y;
       planeMesh.position.z = plane.position.z;
+      planeMesh.rotation.x = plane.rotation.x;
+      planeMesh.rotation.y = plane.rotation.y;
+      planeMesh.rotation.z = plane.rotation.z;
       this.scene.add(planeMesh);
       this.info[name] = planeMesh;
     }
   }
 
   animate() {
+    this.updateDimensions();
     requestAnimationFrame(this.animate.bind(this));
     this.renderer.render(this.scene, this.camera);
     this.controls.update();
