@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import * as THREE from 'three';
-import earth from './textures/WorldMap.png';
+import TrackballControls from 'three-trackballcontrols';
+import earth from './textures/WorldMapFlat.png';
 
 import './global_map.css';
 
@@ -17,10 +18,12 @@ export default class GlobalMap extends Component {
   }
 
   init() {
-    this.canvas = ReactDOM.findDOMNode(this);
+    this.canvas = ReactDOM.findDOMNode(this).getElementsByTagName('canvas')[0];
     this.camera = new THREE.PerspectiveCamera(
       75, window.innerWidth / window.innerHeight, 0.1, 100 );
+    this.camera.up.set(0, 1, 0);
     this.camera.position.z = 1;
+    this.camera.lookAt(new THREE.Vector3(0,0,0));
     this.scene = new THREE.Scene();
 
     const light = new THREE.DirectionalLight(0xffffff, 1);
@@ -33,7 +36,7 @@ export default class GlobalMap extends Component {
       canvas: this.canvas,
       antialias: true,
     });
-    this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
+    this.controls = new TrackballControls(this.camera, this.canvas);
 	}
 
   animate() {
@@ -41,6 +44,17 @@ export default class GlobalMap extends Component {
     this.globe.rotation.x += 0.001;
     this.globe.rotation.y += 0.002;
     this.renderer.render(this.scene, this.camera);
+  }
+
+  updateDimensions() {
+    const root = ReactDOM.findDOMNode(this);
+    this.canvas.width = root.clientWidth;
+    this.canvas.height = root.clientHeight;
+    this.canvas.setAttribute(
+      'style', `width: ${root.clientWidth}px; height: ${root.clientHeight}px;`);
+    this.camera.aspect = this.canvas.clientWidth / this.canvas.clientHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
   }
 
   componentDidMount() {
@@ -52,9 +66,19 @@ export default class GlobalMap extends Component {
     this.globe = new THREE.Mesh(geometry, material);
     this.scene.add(this.globe);
     this.animate();
+    window.addEventListener("resize", this.updateDimensions.bind(this));
+    this.updateDimensions();
+  }
+
+  componentDidUnMount() {
+    window.removeEventListener("resize", this.updateDimensions.bind(this));
   }
 
   render() {
-    return <canvas className="canvas"></canvas>
+    return (
+      <div className="canvasContainer">
+        <canvas className="canvas"></canvas>
+      </div>
+    );
   }
 }

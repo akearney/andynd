@@ -1,4 +1,4 @@
-.canvas {
+.canvas, .canvasContainer {
   width: 100%;
-  height: calc(100% - 90px);
+  height: 100%;
 }
