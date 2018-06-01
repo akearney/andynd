@@ -2,4 +2,4 @@ npm-debug.log
 *.swp
 *.swo
 node/node_modules/.cache/*
-node_modules/*
+node/node_modules/*
