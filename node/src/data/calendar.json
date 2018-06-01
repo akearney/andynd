@@ -13,7 +13,6 @@
     "origin": "Frostfall",
     "nameFrom": "Frost",
     "days": 40
-  }
   }, {
     "name": "Nix",
     "origin": "Deepsnow",
@@ -28,11 +27,6 @@
     "name": "Pinnae",
     "origin": "Firstflow",
     "nameFrom": "Water",
-    "days": 40
-  }, {
-    "name": "Serotine",
-    "origin": "Blossomtide",
-    "nameFrom": "Blossom",
     "days": 40
   }, {
     "name": "Serotine",
@@ -119,4 +113,5 @@
   "moonCycle": {
     "link": "https://donjon.bin.sh/fantasy/calendar/",
     "data": {"year_len":352,"events":1,"n_months":12,"months":[],"month_len":{"0":8,"1":40,"2":40,"3":8,"4":40,"5":40,"6":8,"7":40,"8":40,"9":8,"10":40,"11":40},"week_len":8,"weekdays":[],"n_moons":3,"moons":[],"lunar_cyc":{"0":12,"1":88,"2":352},"lunar_shf":{"0":0,"1":0,"2":0},"year":893,"first_day":0,"notes":{}}
+  }
 }

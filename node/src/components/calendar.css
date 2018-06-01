@@ -1,0 +1,109 @@
+.calendar {
+  color: #000000;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  font-family: cursive;
+}
+
+.month {
+  padding: 16px;
+}
+
+.calendar table .today {
+  background-color: lightblue;
+  border: 2px blue solid;
+
+}
+
+.calendar th {
+  font-size: 12px;
+  width: 50px;
+}
+
+.calendar td, .calendar table, .calendar .monthHeader {
+  border: 1px black solid;
+}
+
+.calendar tbody tr {
+  height: 50px;
+}
+
+.calendar thead tr {
+  height: 32px;
+}
+
+.calendar table {
+  border-collapse: collapse;
+}
+
+.calendar .monthHeader {
+  font-size: 24px;
+  padding: 12px;
+  border-bottom: none;
+}
+
+.Tenebra .monthHeader {
+  background-color: #434343;
+  color: #ffffff;
+}
+
+.Tenebra table {
+  background-color: #666666;
+  color: #ffffff;
+}
+
+.Frigus .monthHeader, .Nix .monthHeader {
+  background-color: #999999;
+}
+
+.Frigus table, .Nix table {
+  background-color: #d9d9d9;
+}
+
+.Nascor .monthHeader {
+  background-color: #6aa84f;
+}
+
+.Nascor table , .Pinnae table, .Serotine table {
+  background-color: #93c47d;
+}
+
+.Pinnae .monthHeader, .Serotine .monthHeader {
+  background-color: #38761d;
+}
+
+.Coctus .monthHeader {
+  background-color: #ff0000;
+}
+
+.Coctus table,
+.Crusta .monthHeader,
+.Conlegi .monthHeader {
+  background-color: #e69138;
+}
+
+.Crusta table,
+.Conlegi table {
+  background-color: #ffd966;
+}
+
+.Depostus .monthHeader {
+  background-color: #e06666;
+}
+
+.Depostus table,
+.Deliratio .monthHeader,
+.Anima .monthHeader {
+  background-color: #ea9999;
+}
+
+.Deliratio table,
+.Anima table {
+  background-color: #fff;
+}
+/*
+    "name": "Depostus",
+    "name": "Deliratio",
+    "name": "Anima",
+    */

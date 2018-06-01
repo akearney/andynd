@@ -26,6 +26,7 @@ export default class GlobalMap extends Component {
     this.raycaster = null;
     this.mouse = null;
     this.info = {};
+    this.shouldAnimate = false;
   }
 
   init() {
@@ -76,7 +77,7 @@ export default class GlobalMap extends Component {
       if (!plane) {
         continue;
       }
-      if (DEBUG_PLANE && name != DEBUG_PLANE) {
+      if (DEBUG_PLANE && name !== DEBUG_PLANE) {
         continue;
       }
       const geometry = new THREE.PlaneGeometry(plane.size.x, plane.size.y, 32);
@@ -99,7 +100,9 @@ export default class GlobalMap extends Component {
   }
 
   animate() {
-    this.updateDimensions();
+    if (!this.shouldAnimate) {
+      return;
+    }
     requestAnimationFrame(this.animate.bind(this));
     this.renderer.render(this.scene, this.camera);
     this.controls.update();
@@ -138,6 +141,7 @@ export default class GlobalMap extends Component {
   }
 
   componentDidMount() {
+    this.shouldAnimate = true;
     this.init();
     const geometry = new THREE.SphereGeometry(0.5, 32, 32);
     const material = new THREE.MeshPhongMaterial({
@@ -150,7 +154,8 @@ export default class GlobalMap extends Component {
     this.updateDimensions();
   }
 
-  componentDidUnMount() {
+  componentWillUnmount() {
+    this.shouldAnimate = false;
     window.removeEventListener("resize", this.updateDimensions.bind(this));
   }
 
