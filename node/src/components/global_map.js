@@ -3,8 +3,11 @@ import ReactDOM from 'react-dom';
 import * as THREE from 'three';
 import TrackballControls from '../plugins/trackball';
 import earth from './textures/AdjustedWorld.png';
+import continents from '../data/continents.json';
 
 import './global_map.css';
+
+const INFO_COLOR = 0xffff00;
 
 export default class GlobalMap extends Component {
   constructor(props) {
@@ -15,9 +18,13 @@ export default class GlobalMap extends Component {
     this.renderer = null;
     this.controls = null;
     this.globe = null;
+    this.raycaster = null;
+    this.mouse = null;
+    this.info = {};
   }
 
   init() {
+    this.mouse = new THREE.Vector2();
     this.canvas = ReactDOM.findDOMNode(this).getElementsByTagName('canvas')[0];
     this.camera = new THREE.PerspectiveCamera(
       75, window.innerWidth / window.innerHeight, 0.1, 100 );
@@ -49,12 +56,64 @@ export default class GlobalMap extends Component {
     this.controls.dynamicDampingFactor = 0.3;
 
     this.controls.keys = [ 65, 83, 68 ];
+    this.raycaster = new THREE.Raycaster();
+		this.addInfoSquares();
 	}
+
+  addInfoSquares() {
+    for (let i = 0; i < continents.names.length; i++) {
+      const name = continents.names[i];
+      console.log(name);
+      const plane = continents[name].plane;
+      console.log(continents[name]);
+      if (!plane) {
+        continue;
+      }
+      console.log(plane);
+      const geometry = new THREE.PlaneGeometry(plane.size.x, plane.size.y, plane.size.z);
+      const material = new THREE.MeshBasicMaterial( {
+        color: INFO_COLOR,
+        side: THREE.DoubleSide
+      } );
+      if (INFO_COLOR === 0x000000) {
+        material.opacity = 0;
+      }
+      const planeMesh = new THREE.Mesh( geometry, material );
+      planeMesh.rotation.x = plane.rotation.x;
+      planeMesh.rotation.y = plane.rotation.y;
+      planeMesh.rotation.z = plane.rotation.z;
+      planeMesh.position.x = plane.position.x;
+      planeMesh.position.y = plane.position.y;
+      planeMesh.position.z = plane.position.z;
+      this.scene.add(planeMesh);
+      this.info[name] = planeMesh;
+    }
+  }
 
   animate() {
     requestAnimationFrame(this.animate.bind(this));
     this.renderer.render(this.scene, this.camera);
     this.controls.update();
+    if (this.mouse && this.mouse.x && this.mouse.y) {
+      const mousePoint = new THREE.Vector3(this.mouse.x, this.mouse.y, 1);
+      mousePoint.unproject(this.camera);
+      const ray = new THREE.Raycaster(
+        this.camera.position, mousePoint.sub(this.camera.position).normalize());
+      const intersect = ray.intersectObjects(this.scene.children);
+      if (intersect && intersect.length > 0) {
+        for (let i = 0; i < intersect.length; i++) {
+          if (intersect[i].object !== this.globe) {
+            Object.keys(this.info).forEach(name => {
+              if (this.info[name] === intersect[i].object) {
+                this.props.onContinent(name);
+              }
+            });
+          } else {
+            break;
+          }
+        }
+      }
+    }
   }
 
   updateDimensions() {
@@ -86,10 +145,18 @@ export default class GlobalMap extends Component {
     window.removeEventListener("resize", this.updateDimensions.bind(this));
   }
 
+  handleMouseMove(event) {
+    const target = event.target;
+    const rect = target.getBoundingClientRect();
+    this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    this.mouse.y = ((event.clientY - rect.top) / rect.height) * -2 + 1;;
+  }
+
   render() {
     return (
       <div className="canvasContainer">
-        <canvas className="canvas"></canvas>
+        <canvas onMouseMove={ this.handleMouseMove.bind(this) }
+            className="canvas"></canvas>
       </div>
     );
   }

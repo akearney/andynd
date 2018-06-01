@@ -1,0 +1,42 @@
+{
+  "names": [
+    "Aebrynis", "Cerelia", "Tollanar", "Aduria", "Thaele", "Djapar", "Niashon"],
+  "Aebrynis": {
+    "creatorRace": ""
+  },
+  "Cerelia": {
+    "creatorRace": "Human"
+  },
+  "Tollanar": {
+    "creatorRace": "Aearee (known as avians, and creators of the aarakocra, kenku, and other birdlike humanoids)"
+  },
+  "Aduria": {
+    "creatorRace": "Batrachi (creators of the bullywugs, doppelgangers, kopru, kuo-toa, locathah, sivs, tako and other shapeshifting, amphibious, or piscine races)"
+  },
+  "Thaele": {
+    "creatorRace": "null",
+    "otherRaces": "Giantkin",
+    "plane": {
+      "size": {
+        "x": 0.38,
+        "y": 0.38
+      },
+      "position": {
+        "x": 0,
+        "y": 0.51,
+        "z": 0
+      },
+      "rotation": {
+        "x": 80,
+        "y": 0,
+        "z": 0
+      }
+    }
+  },
+  "Djapar": {
+    "creatorRace": "Sarrukh (creators of the yuan-ti, naga, lizardfolk, and scalykind)"
+  },
+  "Niashon": {
+    "creatorRace": "Fey (known as sylvans, and creators of korreds, halflings, sprites, and pixies)"
+  }
+}
