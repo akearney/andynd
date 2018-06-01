@@ -85,7 +85,7 @@ export default class GlobalMap extends Component {
         transparent: true,
         side: THREE.DoubleSide
       } );
-      // material.opacity = 0;
+      material.opacity = 0;
       const planeMesh = new THREE.Mesh( geometry, material );
       planeMesh.position.x = plane.position.x;
       planeMesh.position.y = plane.position.y;
