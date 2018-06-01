@@ -7,21 +7,29 @@ export default class Continents extends Component {
     const children = [
     ];
     if (this.props.display && continents[this.props.display]) {
-      children.push(<div>{ this.props.display } </div>);
+      children.push(<h2>{ this.props.display } </h2>);
       const displayInfo = continents[this.props.display];
       if (displayInfo) {
         if (displayInfo['creatorRace']) {
-          children.push(<div>Creator Race: { continents[this.props.display]['creatorRace'] } </div>);
+          children.push(
+            <div>
+              <h3 className="header">Creator Race:</h3>
+              <div className="body"> { continents[this.props.display]['creatorRace'] } </div>
+            </div>);
         }
-        if (displayInfo["otherRaces"]) {
-          children.push(<div>Other Main Races: { continents[this.props.display]["otherRaces"] } </div>);
+        if (displayInfo['otherRaces']) {
+          children.push(
+            <div>
+              <h3 className="header">Other Main Races:</h3>
+              <div className="body"> { continents[this.props.display]['otherRaces'] } </div>
+            </div>);
         }
       }
     }
 
     return (
       <div className="continents">
-      { children }
+        { children }
       </div>
     );
   }

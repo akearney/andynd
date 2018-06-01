@@ -1,3 +1,13 @@
 .continents {
   width: 300px;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.continents div {
+  padding: 16px;
+}
+
+.pair {
+  display: inline-block;
 }
