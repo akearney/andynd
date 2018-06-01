@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import * as THREE from 'three';
-import TrackballControls from 'three-trackballcontrols';
-import earth from './textures/WorldMapFlat.png';
+import TrackballControls from '../plugins/trackball';
+import earth from './textures/AdjustedWorld.png';
 
 import './global_map.css';
 
@@ -28,7 +28,8 @@ export default class GlobalMap extends Component {
 
     const light = new THREE.DirectionalLight(0xffffff, 1);
     light.position.set(5,5,5);
-    this.scene.add(light)
+    this.camera.add(light)
+    this.scene.add(this.camera);
     const ambient = new THREE.AmbientLight(0x222222);
     this.scene.add(ambient);
 
@@ -37,13 +38,23 @@ export default class GlobalMap extends Component {
       antialias: true,
     });
     this.controls = new TrackballControls(this.camera, this.canvas);
+    this.controls.rotateSpeed = 1.0;
+    this.controls.zoomSpeed = 1.2;
+    this.controls.panSpeed = 0.8;
+
+    this.controls.noZoom = false;
+    this.controls.noPan = false;
+
+    this.controls.staticMoving = true;
+    this.controls.dynamicDampingFactor = 0.3;
+
+    this.controls.keys = [ 65, 83, 68 ];
 	}
 
   animate() {
     requestAnimationFrame(this.animate.bind(this));
-    this.globe.rotation.x += 0.001;
-    this.globe.rotation.y += 0.002;
     this.renderer.render(this.scene, this.camera);
+    this.controls.update();
   }
 
   updateDimensions() {
@@ -55,6 +66,7 @@ export default class GlobalMap extends Component {
     this.camera.aspect = this.canvas.clientWidth / this.canvas.clientHeight;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
+    this.controls.handleResize();
   }
 
   componentDidMount() {
