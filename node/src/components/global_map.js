@@ -81,7 +81,7 @@ export default class GlobalMap extends Component {
       }
       const geometry = new THREE.PlaneGeometry(plane.size.x, plane.size.y, 32);
       const material = new THREE.MeshBasicMaterial( {
-        color: 0x000000,
+        color: 0xffff00,
         transparent: true,
         side: THREE.DoubleSide
       } );
@@ -109,7 +109,7 @@ export default class GlobalMap extends Component {
       const ray = new THREE.Raycaster(
         this.camera.position, mousePoint.sub(this.camera.position).normalize());
       const intersect = ray.intersectObjects(this.scene.children);
-      if (intersect && intersect.length > 0) {
+      if (intersect && intersect.length != 2) {
         for (let i = 0; i < intersect.length; i++) {
           if (intersect[i].object !== this.globe) {
             Object.keys(this.info).forEach(name => {
