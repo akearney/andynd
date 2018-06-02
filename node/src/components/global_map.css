@@ -1,4 +1,5 @@
 .canvas, .canvasContainer {
+  min-width: 300px;
   width: 50%;
   height: 100%;
 }

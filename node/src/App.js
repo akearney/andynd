@@ -12,7 +12,6 @@ class App extends Component {
       <Router>
         <div className="App">
           <header className="App-header">
-            <h1 className="App-title">Welcome to DnD</h1>
             <Link to="/">World Globe</Link>
             <Link to="/calendar">Calendar</Link>
             <Link to="/map">Map</Link>
