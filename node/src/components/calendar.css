@@ -102,8 +102,36 @@
 .Anima table {
   background-color: #fff;
 }
-/*
-    "name": "Depostus",
-    "name": "Deliratio",
-    "name": "Anima",
-    */
+
+.hasLog {
+	position: relative;
+  cursor: pointer;
+}
+
+.hasLog:after { /* Magic Happens Here!!! */
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    display: block;
+    border-left: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-top: 20px solid blue;
+} /* </magic> */
+
+.close {
+  float: right;
+  cursor: pointer;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 36px;
+  height: 32px;
+  font-size: 24px;
+}
+
+.logContent {
+  text-align: center;
+}
