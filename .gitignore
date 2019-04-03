@@ -3,3 +3,4 @@ npm-debug.log
 *.swo
 node/node_modules/.cache/*
 node/node_modules/*
+node/password.txt
